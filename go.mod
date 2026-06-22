@@ -66,6 +66,7 @@ require (
 	github.com/ydb-platform/ydb-go-sdk/v3 v3.128.2
 	github.com/yookoala/realpath v1.0.0
 	github.com/ziutek/mymysql v1.5.4
+	golang.org/x/term v0.41.0
 	gorm.io/driver/bigquery v1.2.0
 	modernc.org/ql v1.4.31
 	modernc.org/sqlite v1.47.0
@@ -343,7 +344,6 @@ require (
 	golang.org/x/sync v0.20.0 // indirect
 	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/telemetry v0.0.0-20260316223853-b6b0c46d1ccd // indirect
-	golang.org/x/term v0.41.0 // indirect
 	golang.org/x/text v0.35.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/tools v0.43.0 // indirect
