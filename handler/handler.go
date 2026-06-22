@@ -94,6 +94,8 @@ type Handler struct {
 	out io.WriteCloser
 }
 
+var readPasswordFallback = promptPasswordFallback
+
 // New creates a new input handler.
 func New(l rline.IO, user *user.User, wd string, charts billy.Filesystem, nopw bool) *Handler {
 	f, iactive := l.Next, l.Interactive()
@@ -901,6 +903,9 @@ func (h *Handler) Password(dsn string) (string, error) {
 		user = u.User.Username()
 	}
 	pass, err := h.l.Password(text.EnterPassword)
+	if errors.Is(err, rline.ErrPasswordNotAvailable) {
+		pass, err = readPasswordFallback(text.EnterPassword)
+	}
 	if err != nil {
 		return "", err
 	}
