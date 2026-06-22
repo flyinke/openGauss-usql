@@ -8,6 +8,9 @@ import (
 )
 
 func init() {
+	if drivers.Registered("postgres") {
+		dburl.RegisterAlias("postgres", "opengauss")
+	}
 	if runtime.GOOS == "windows" {
 		// if no odbc driver, but we have adodb, add 'odbc' (and related
 		// aliases) as alias for oleodbc

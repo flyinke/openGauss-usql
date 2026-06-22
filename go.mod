@@ -3,6 +3,7 @@ module github.com/xo/usql
 go 1.26.1
 
 require (
+	gitee.com/opengauss/openGauss-connector-go-pq v1.0.7
 	github.com/ClickHouse/clickhouse-go/v2 v2.43.0
 	github.com/IBM/nzgo/v12 v12.0.10
 	github.com/MichaelS11/go-cql-driver v0.1.1
@@ -36,7 +37,6 @@ require (
 	github.com/jmrobles/h2go v0.5.0
 	github.com/kenshaw/colors v0.2.4
 	github.com/kenshaw/rasterm v0.1.16
-	github.com/lib/pq v1.12.0
 	github.com/mattn/go-adodb v0.0.1
 	github.com/mattn/go-isatty v0.0.20
 	github.com/mattn/go-runewidth v0.0.21
@@ -311,6 +311,7 @@ require (
 	github.com/stretchr/objx v0.5.3 // indirect
 	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
+	github.com/tjfoc/gmsm v1.4.1 // indirect
 	github.com/uber-go/tally v3.3.17+incompatible // indirect
 	github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb // indirect
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect

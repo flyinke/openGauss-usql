@@ -30,11 +30,9 @@ import (
 	"github.com/alecthomas/chroma/v2/formatters"
 	"github.com/alecthomas/chroma/v2/styles"
 	"github.com/go-git/go-billy/v5"
+	"github.com/xo/tblfmt"
 	"github.com/xo/dburl"
 	"github.com/xo/dburl/passfile"
-	"github.com/xo/echartsgoja"
-	"github.com/xo/resvg"
-	"github.com/xo/tblfmt"
 	"github.com/xo/usql/drivers"
 	"github.com/xo/usql/drivers/completer"
 	"github.com/xo/usql/drivers/metadata"
@@ -1107,20 +1105,7 @@ func (h *Handler) doExecChart(ctx context.Context, w io.Writer, opt metacmd.Opti
 	if err != nil {
 		return err
 	}
-	echarts := echartsgoja.New(echartsgoja.WithWidthHeight(cfg.W, cfg.H))
-	res, err := echarts.RenderOptions(ctx, data)
-	if err != nil {
-		return err
-	}
-	if cfg.File != "" {
-		fmt.Println("writing to", cfg.File)
-		return os.WriteFile(cfg.File, []byte(res), 0o644)
-	}
-	img, err := resvg.Render([]byte(res), resvg.WithBackground(cfg.Background))
-	if err != nil {
-		return err
-	}
-	if err := typ.Encode(stdout, img); err != nil {
+	if err := renderChart(ctx, stdout, typ, cfg, data); err != nil {
 		return err
 	}
 	if h.timing {

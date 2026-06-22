@@ -39,7 +39,7 @@ func KnownBuildTags() map[string]string {
 		"oracle":        "oracle",        // github.com/sijms/go-ora/v2
 		"ots":           "ots",           // github.com/aliyun/aliyun-tablestore-go-sql-driver
 		"pgx":           "pgx",           // github.com/jackc/pgx/v5/stdlib
-		"postgres":      "postgres",      // github.com/lib/pq
+		"postgres":      "postgres",      // gitee.com/opengauss/openGauss-connector-go-pq
 		"presto":        "presto",        // github.com/prestodb/presto-go-client/presto
 		"ql":            "ql",            // modernc.org/ql
 		"ramsql":        "ramsql",        // github.com/proullon/ramsql/driver

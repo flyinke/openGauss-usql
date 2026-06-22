@@ -139,6 +139,14 @@ $ go install -tags most github.com/xo/usql@latest
 
 See [below for information](#building) on `usql` build tags.
 
+### openGauss Fork
+
+This fork adds openGauss compatibility on top of upstream `usql`.
+
+- Fork-specific guidance lives in [docs/opengauss-fork.md](docs/opengauss-fork.md).
+- Keep the fork delta as small as possible so future upstream syncs are easier.
+- Prefer isolated fork-only docs instead of broad README rewrites.
+
 ### Installing via Docker
 
 An [official container image (`docker.io/usql/usql`)][docker-hub] is maintained
@@ -217,6 +225,10 @@ $ go install -tags most github.com/xo/usql@main
 $ go install -tags all github.com/xo/usql@main
 ```
 
+### openGauss Build Notes
+
+For fork-specific build, versioning, and delivery guidance, see [docs/opengauss-fork.md](docs/opengauss-fork.md).
+
 ## Database Support
 
 `usql` works with all Go standard library compatible SQL drivers supported by
@@ -258,7 +270,7 @@ associated database, scheme / build tag, and scheme aliases:
 
 | Database             | Scheme / Tag    | Scheme Aliases                                  | Driver Package / Notes                                                      |
 | -------------------- | --------------- | ----------------------------------------------- | --------------------------------------------------------------------------- |
-| PostgreSQL           | `postgres`      | `pg`, `pgsql`, `postgresql`                     | [github.com/lib/pq][d-postgres]                                             |
+| PostgreSQL           | `postgres`      | `pg`, `pgsql`, `postgresql`, `opengauss`        | [gitee.com/opengauss/openGauss-connector-go-pq][d-postgres]                 |
 | MySQL                | `mysql`         | `my`, `maria`, `aurora`, `mariadb`, `percona`   | [github.com/go-sql-driver/mysql][d-mysql]                                   |
 | Microsoft SQL Server | `sqlserver`     | `ms`, `mssql`, `azuresql`                       | [github.com/microsoft/go-mssqldb][d-sqlserver]                              |
 | Oracle Database      | `oracle`        | `or`, `ora`, `oci`, `oci8`, `odpi`, `odpi-c`    | [github.com/sijms/go-ora/v2][d-oracle]                                      |
@@ -306,8 +318,8 @@ associated database, scheme / build tag, and scheme aliases:
 | GO DRiver for ORacle | `godror`        | `gr`                                            | [github.com/godror/godror][d-godror] <sup>[†][f-cgo]</sup>                  |
 | ODBC                 | `odbc`          | `od`                                            | [github.com/alexbrainman/odbc][d-odbc] <sup>[†][f-cgo]</sup>                |
 |                      |                 |                                                 |                                                                             |
-| Amazon Redshift      | `postgres`      | `rs`, `redshift`                                | [github.com/lib/pq][d-postgres] <sup>[‡][f-wire]</sup>                      |
-| CockroachDB          | `postgres`      | `cr`, `cdb`, `crdb`, `cockroach`, `cockroachdb` | [github.com/lib/pq][d-postgres] <sup>[‡][f-wire]</sup>                      |
+| Amazon Redshift      | `postgres`      | `rs`, `redshift`                                | [gitee.com/opengauss/openGauss-connector-go-pq][d-postgres] <sup>[‡][f-wire]</sup> |
+| CockroachDB          | `postgres`      | `cr`, `cdb`, `crdb`, `cockroach`, `cockroachdb` | [gitee.com/opengauss/openGauss-connector-go-pq][d-postgres] <sup>[‡][f-wire]</sup> |
 | OLE ODBC             | `adodb`         | `oo`, `ole`, `oleodbc`                          | [github.com/mattn/go-adodb][d-adodb] <sup>[‡][f-wire]</sup>                 |
 | SingleStore MemSQL   | `mysql`         | `me`, `memsql`                                  | [github.com/go-sql-driver/mysql][d-mysql] <sup>[‡][f-wire]</sup>            |
 | TiDB                 | `mysql`         | `ti`, `tidb`                                    | [github.com/go-sql-driver/mysql][d-mysql] <sup>[‡][f-wire]</sup>            |
@@ -352,7 +364,7 @@ associated database, scheme / build tag, and scheme aliases:
 [d-oracle]: https://github.com/sijms/go-ora
 [d-ots]: https://github.com/aliyun/aliyun-tablestore-go-sql-driver
 [d-pgx]: https://github.com/jackc/pgx
-[d-postgres]: https://github.com/lib/pq
+[d-postgres]: https://gitee.com/opengauss/openGauss-connector-go-pq
 [d-presto]: https://github.com/prestodb/presto-go-client
 [d-ql]: https://gitlab.com/cznic/ql
 [d-ramsql]: https://github.com/proullon/ramsql
@@ -559,6 +571,10 @@ $ usql postgres://user:pass@host:port/dbname
 $ usql pg://
 $ usql /var/run/postgresql
 $ usql pg://user:pass@host/dbname?sslmode=disable # Connect without SSL
+
+# connect to an openGauss database (this fork)
+$ gausssql opengauss://user:pass@host:port/postgres?sslmode=disable
+$ gausssql postgres://user:pass@host:port/postgres?sslmode=disable
 
 # connect to a mysql database
 $ usql my://user:pass@host/dbname

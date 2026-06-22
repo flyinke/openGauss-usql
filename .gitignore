@@ -1,6 +1,8 @@
 /usql
 /usql.exe
+/gausssql
 /build/
+/\.local/
 /coverage.out
 /*.sql
 /*.txt

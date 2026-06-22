@@ -2,8 +2,9 @@
 //
 // Alias: cockroachdb, CockroachDB
 // Alias: redshift, Amazon Redshift
+// Alias: opengauss, openGauss
 //
-// See: https://github.com/lib/pq
+// See: https://gitee.com/opengauss/openGauss-connector-go-pq
 // Group: base
 package postgres
 
@@ -15,7 +16,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/lib/pq" // DRIVER
+	pq "gitee.com/opengauss/openGauss-connector-go-pq" // DRIVER
 	"github.com/xo/dburl"
 	"github.com/xo/usql/drivers"
 	"github.com/xo/usql/drivers/metadata"
@@ -62,7 +63,7 @@ func init() {
 				if err != nil {
 					return nil, err
 				}
-				// special retry handling case, since there's no lib/pq retry mode
+				// special retry handling case, since there's no driver retry mode
 				if env.Get("SSLMODE") == "retry" && !u.Query().Has("sslmode") {
 					switch err = conn.PingContext(ctx); {
 					case errors.Is(err, pq.ErrSSLNotSupported):
@@ -186,5 +187,5 @@ func init() {
 
 			return n, rows.Err()
 		},
-	}, "cockroachdb", "redshift")
+	}, "cockroachdb", "redshift", "opengauss")
 }
